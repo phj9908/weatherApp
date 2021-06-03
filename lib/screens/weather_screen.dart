@@ -4,11 +4,16 @@ import 'package:google_fonts/google_fonts.dart'; // 폰트
 import 'package:intl/intl.dart'; // 자료형 변환
 import 'package:timer_builder/timer_builder.dart';
 import 'package:weather_app/model/model.dart'; // 현재 시간
+import 'First.dart';
+import 'Second.dart';
+import 'Basis.dart';
 
 class WeatherScreen extends StatefulWidget{
 
   final dynamic parseWeatherData;
   final dynamic parseAirData;
+
+
 
   WeatherScreen({this.parseWeatherData, this.parseAirData});   // 클래스 생성자 아규먼트에 날씨데이터 추가함으로써 다른 파일에서 이 화면으로 이동할때 날씨데이터 전달하도록 함
 
@@ -28,11 +33,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
   var date = DateTime.now();
   double dust1; // 미세먼지
   double dust2; //초미세먼지 지수
+  // Basis basis;
+
 
   @override
   void initState() {  // weatherScreen 위젯이 나타나는 순간 parseWeatherData 전달받도록
   super.initState();
+  // updateData(widget.basisWeatherData,basis.basisAirData);
   updateData(widget.parseWeatherData,widget.parseAirData);
+
   }
 
   void updateData(dynamic weatherData, dynamic airData){
@@ -57,7 +66,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
           airIcon = model.getAireIcon(index);
           airState = model.getAirCondition(index);
 
-
   }
 
   String getSystemTime(){
@@ -67,9 +75,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                               // ("h:mm a") 의 a는 am,pm 표시
   }
 
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
     return Scaffold(
       extendBodyBehindAppBar: true, // 이거 까지 지정해야 앱바 배경 안보임
       appBar: AppBar(
@@ -95,7 +105,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             Image.asset(
               'image/background.jpg',
           fit: BoxFit.cover, // 화면에 다 채워지게
-              width:double.infinity, 
+              width:double.infinity,
               height: double.infinity, // 이거 까지 설정해야 다 채워짐
             ),
             Container(
@@ -292,6 +302,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
           ],
         ),
       ),
+
+
     );
   }
+
+
 }

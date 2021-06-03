@@ -1,10 +1,13 @@
 
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http; // 다른개발자가 리뷰할 때 가독성을 위해
 import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
 
 import 'package:weather_app/data/my_location.dart';
 import 'package:weather_app/data/network.dart';
+import 'package:weather_app/screens/Basis.dart';
 import 'package:weather_app/screens/weather_screen.dart';
 
 // 날씨 API 사이트 : https://openweathermap.org/current , API 카테고리 클릭
@@ -48,9 +51,12 @@ class _LoadingState extends State<Loading> {
     print(airData);
 
     Navigator.push(context, MaterialPageRoute(builder: (context){   // WeatherScreen으로 화면 이동
-      return WeatherScreen(
-        parseWeatherData: weatherData,
-        parseAirData: airData);   // weatherScreen페이지에 weatherData 전달
+      return Basis(
+        basisWeatherData: weatherData,
+        basisAirData: airData);   // 기본페이지에 weatherData 전달
+      // return WeatherScreen(
+      //     parseWeatherData: weatherData,
+      //     parseAirData: airData);   // 기본페이지에 weatherData 전달
     }
     ));
 }
@@ -88,18 +94,23 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
+    return  Scaffold(
+      backgroundColor: Colors.orangeAccent,
       body: Center(
+
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
+            primary: Colors.orangeAccent,
           )
           ,onPressed: (){
 
 
           },
           child: Text(
-            'Get my location',
+            'Get my location...',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
